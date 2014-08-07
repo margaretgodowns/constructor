@@ -2,8 +2,47 @@
 <html>
   <head>
     <title></title>
+    <link rel="stylesheet" href="styleSheets/styles.css" charset="utf-8">
   </head>
   <body>
+    <h1>wanna get away?</h1>
+
+    <form class="whereTo" action="index.html" method="post">
+      <div class="cities">
+        <a href="#" id="prague"><img src="images/prague.jpg"></a>
+        <a href="#" id="sanfran"><img src="images/sanFran.jpg"></a>
+        <a href="#" id="antarctica"><img src="images/antarctica.jpg"></a>
+      </div>
+      <div class="transportMethod">
+        <a href="#" class="plane"><img src="images/plane.png"></a>
+        <a href="#" class="car"><img src="images/car.png"></a>
+        <a href="#" class="boat"><img src="images/boat.png"></a>
+        <br>
+      <button type="submit" value="">Let's go</button>
+      <p class="answer"></p>
+    </form>
+
+    <h1>will weather affect your speed?</h1>
+
+    <form class="form2"action="index.html" method="post">
+
+      <select class="transportMethod2">
+        <option value="plane">Plane</option>
+        <option value="car">Car</option>
+        <option value="boat">Boat</option>
+      </select>
+
+      <select class="forecast">
+        <option id="weatherFair" value="fair">Fair</option>
+        <option id="weatherStorm" value="storm">Storm</option>
+        <option id="weatherSnow" value="snow">Snow</option>
+      </select>
+        <br>
+        <button type="submit" value="">Find out</button>
+    </form>
+
+    <script src="node_modules/jquery/dist/jquery.js">
+    </script>
     <script src="script.js">
     </script>
   </body>

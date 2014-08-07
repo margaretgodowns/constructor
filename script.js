@@ -1,31 +1,89 @@
-//the constructor written as a function
+var destination;
+var transport;
+var weather;
+
+
+
+
+$(document).ready(function(){
+
+
+  $("#prague").click(function(event){
+    event.preventDefault();
+    destination = new Destination ("Prague", 4698);
+    });
+
+  $("#sanfran").click(function(event){
+    event.preventDefault();
+    destination = new Destination ("San Francisco", 2770);
+    });
+
+  $("#antarctica").click(function(event){
+    event.preventDefault();
+    destination = new Destination ("Antarctica", 8183);
+    });
+
+  $(".plane").click(function(event){
+    event.preventDefault();
+    transport = new Transportation ("plane", 600);
+    });
+
+  $(".car").click(function(event){
+    event.preventDefault();
+    transport = new Transportation ("car", 65);
+    });
+
+  $(".boat").click(function(event){
+    event.preventDefault();
+    transport = new Transportation ("boat", 27);
+    });
+
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    destination.cityChoice(transport);
+  });
+
+  $("#weatherFair").on("submit", function(event){
+    event.preventDefault();
+    weather= new Weather ("clear", 0, 5)
+  });
+
+  $("#weatherStorm").on("submit", function(event){
+    event.preventDefault();
+    weather= new Weather ("storm", 85, 25)
+  });
+
+  $("#weatherSnow").on("submit", function(event){
+    event.preventDefault();
+    weather= new Weather ("snow", 75, 8)
+  });
+
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    weather.windSpeed(transport);
+  });
+});
 
 function Destination (city, distance, overseas){
-
-  //parameters of the constructor
 
   this.city = city;
   this.distance = distance;
   this.overseas = overseas;
-
-  //how to choose the city to travel to: the cityChoice is a function of transportation, so you have to figure out travel time. Travel time is the distance of the destination divided by the transportation's speed.
-
   this.cityChoice = function(transInstance){
     var travelTime = this.distance/transInstance.speed;
 
-    //the travel time is less than eight hours, you go to the city!
-
     if (travelTime < 8){
-      console.log ("pack your bag!");
+      $("body").append("<h1>pack your bag!</h1>");
     } else{
-      console.log ("sorry, travel somewhere closer!");
+      $("body").append("<h1>Sorry, Travel Closer</h1>");
     }
   };
 }
 
-var destPrague = new Destination ("Prague", 4698, "overseas");
-var destSanFran = new Destination ("San Francisco", 2770, "continental");
-var destAntarc = new Destination ("Antarctica", 8183, "overseas");
+
+  var destPrague = new Destination ("Prague", 4698);
+  var destSanFran = new Destination ("San Francisco", 2770);
+  var destAntarc = new Destination ("Antarctica", 8183);
 
 
 //START TRANSPORTATION FUNCTION
@@ -34,9 +92,7 @@ function Transportation (type, speed){
   this.type = type;
   this.speed = speed;
 
-  //the transportation choice is a funtion of the weather type's wind speed, so you have to figure out transportation speed by using a slow-down function. When weatherType.windSpeed is less than or equal to 10mph, the transportation speed is not affected. When the weatherType.windSpeed is greater than 10mph, the transportation speed slows down by 2% per every 2mph.
-
-  this.transChoice = function(weather){
+    this.transChoice = function(weather){
     var transSpeed = this.speed;
     console.log(weather.windSpeed);
     if (weather.windSpeed > 10){
@@ -61,6 +117,8 @@ function Weather (forecast, rainChance, windSpeed){
   this.windSpeed = windSpeed;
 }
 
-var weatherClear = new Weather("clear", 0, 5);
-var weatherStorm = new Weather("storm", 85, 25);
-var weatherSnow = new Weather("snow", 75, 8);
+
+
+var weatherClear = new Weather ("clear", 0, 5);
+var weatherStorm = new Weather ("storm", 85, 25);
+var weatherSnow = new Weather ("snow", 75, 8);
